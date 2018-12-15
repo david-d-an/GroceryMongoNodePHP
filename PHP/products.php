@@ -34,7 +34,10 @@ curl_close($curl);
 
 if ($err) {
   echo "cURL Error #:" . $err;
-} else { $yummy = json_decode($response); }
+}
+else {
+  $yummy = json_decode($response);
+}
 ?>
 
 <div class="container">
@@ -55,6 +58,7 @@ if ($err) {
         <th>QuantityPerUnit</th>
         <th>UnitPrice</th>
         <th>UnitsInStock</th>
+        <th style="width: 150px;">Options</th>
       </tr>
     </thead>
 
@@ -70,8 +74,42 @@ for($i=0; $i<count($yummy); $i++)
         <td><?php echo $yummy[$i]->QuantityPerUnit; ?></td>
         <td><?php echo $yummy[$i]->UnitPrice; ?></td>
         <td><?php echo $yummy[$i]->UnitsInStock; ?></td>
+        <td>
+          <a href="delete.php?_id=<?php echo $yummy[$i]->_id; ?>">
+            <button type="button" class="btn btn-danger">Delete</button>
+          </a>
+          <!-- <a href="edit.php?_id=<?php echo $yummy[$i]->_id; ?>">
+            <button type="button" class="btn btn-warning">Edit</button>
+          </a> -->
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+            Edit
+          </button>
+        </td>
       </tr>
 <?php } ?>
     </tbody>
   </table>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>

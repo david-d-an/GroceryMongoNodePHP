@@ -17,6 +17,7 @@ mongoose
 /***********/
 
 exports.getall = (req,res) => {
+  console.log("Getting it all");
   Product.find()
     .then(p => res.send(p))
     .catch(err => {
@@ -25,7 +26,8 @@ exports.getall = (req,res) => {
 };
 
 exports.get = (req,res) => {
-  Product.findById(req.params.id)
+  console.log("Getting only one");
+  Product.findById(req.params._id)
     .then(p => res.send(p))
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -33,6 +35,7 @@ exports.get = (req,res) => {
 };
 
 exports.post = (req,res) => {
+  console.log("Posting it");
   if (!req.body.ProductID)
     res.status(400).send({message: "ProductID is missing."});
     
@@ -58,14 +61,14 @@ exports.post = (req,res) => {
 };
 
 exports.put = (req,res) => {
-  if (!req.body.sku)
-    return res.send({message: "SKU is missing"});
-  else if (!req.body.name)
-    return res.send({message: "Name is missing"});
-  else if (!req.body.description)
-    return res.send({message: "Description is missing"});
+  console.log("putting it");
 
-  Product.findByIdAndUpdate(req.params.id,
+  if (!req.body.ProductID)
+    return res.send({message: "Product ID is missing"});
+  else if (!req.body.ProductName)
+    return res.send({message: "Product Name is missing"});
+
+  Product.findByIdAndUpdate(req.params._id,
     {
       ProductID: req.body.ProductID,
       ProductName: req.body.ProductName,
@@ -76,7 +79,7 @@ exports.put = (req,res) => {
       UnitsInStock: req.body.UnitsInStock,
       UnitsOnOrder: req.body.UnitsOnOrder,
       ReorderLevel: req.body.ReorderLevel,
-      Discontinued: req.bod.Discontinued
+      Discontinued: req.body.Discontinued
     },
     { new: true }
   )
@@ -92,12 +95,15 @@ exports.put = (req,res) => {
 };
 
 exports.delete = (req,res) => {
-  Product.findByIdAndRemove(req.params.id)
+  console.log("Deleting");
+  Product.findByIdAndRemove(req.params._id)
     .then(p => {
-      if (!p)
+      if (!p){
         res.status(400).send({
-          message: "Product couldn't be found"
+          message: "Product couldn't be found for ID: " + req.params._id
         });
+        console.log("Product couldn't be found for ID: " + req.params._id);
+      }
       else
         res.status(200).send({message:"Successfully deleted",product:p});
     })

@@ -4,11 +4,11 @@ var product = require("../controllers/product.controller");
 module.exports = app => {
   app.get("/product", product.getall);
 
-  app.get("/product/:id", product.get);
+  app.get("/product/:_id", product.get);
 
   app.post("/product", product.post);
 
-  app.put("/product/:id", product.put);
+  app.put("/product/:_id", product.put);
 
-  app.delete("/product/:id", product.delete);
+  app.delete("/product/:_id", product.delete);
 };
