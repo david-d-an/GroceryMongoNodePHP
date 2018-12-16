@@ -115,7 +115,7 @@ for($i=$pagestart; $i < $pageend; $i++)
 <?php } ?>
     </tbody>
   </table>
-  <?php include './class_paging.php'; ?>
+  <?php include './class_paging.inc'; ?>
 </div>
 
 
