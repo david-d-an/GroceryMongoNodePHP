@@ -25,11 +25,35 @@ exports.getall = (req,res) => {
 };
 
 exports.get = (req,res) => {
-  Customer.findById(req.params.id)
-    .then(c => res.send(c))
-    .catch(err => {
-      res.status(500).send({ message: err.message });
-    });
+  // Customer.findById(req.params.CustomerID)
+  Customer.find(
+    {
+      CustomerID: req.params.userid,
+      // PostalCode: req.params.password
+      // CustomerID: "BLONP",
+      // PostalCode: "12209"
+      // Country: "Germany"
+    }, 
+    (err, user) => {
+      // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+      if (err) {
+        console.log(err.message);
+        res.status(500).send({ message: err.message });
+      }
+
+      console.log(user);
+      res.send(user); 
+    }
+  );
+  // )
+  //   .then(c => {
+  //     console.log(c);
+  //     res.send(c);
+  //   })
+  //   .catch(err => {
+  //     console.log(err.message);
+  //     res.status(500).send({ message: err.message });
+  //   });
 };
 
 exports.post = (req,res) => {

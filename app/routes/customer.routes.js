@@ -1,14 +1,14 @@
 // var config = require("../../config/database.config");
-var cusomer = require("../controllers/customer.controller.js");
+var customer = require("../controllers/customer.controller.js");
 
 module.exports = app => {
-  app.get("/customer");
+  app.get("/customer", customer.getall);
 
-  app.get("/customer/:id");
+  app.get("/customer/:userid/:password", customer.get);
 
-  app.post("/customer");
+  app.post("/customer", customer.post);
 
-  app.put("/customer/:id");
+  app.put("/customer/:id", customer.put);
 
-  app.delete("/customer/:id");
+  app.delete("/customer/:id", customer.delete);
 };

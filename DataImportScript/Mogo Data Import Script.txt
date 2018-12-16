@@ -1,2 +1,4 @@
 mongoimport -d grocery -c customers --type csv --file customers.csv --headerline
 mongoimport -d grocery -c products --type csv --file products.csv --headerline
+
+mongoimport -d demo -c users --type csv --file mock_data.csv --headerline
