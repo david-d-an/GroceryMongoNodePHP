@@ -31,5 +31,15 @@ curl_close($curl);
 if ($err) {
   echo "cURL Error #:" . $err;
 } else {
-  echo $response;
+  $json = json_decode($response, true);
+  // echo $json[0]['_id'];
+  $usercount = count($json);
+  //echo count($json);
+
+  if ($usercount > 0){
+    echo "<script>location.href='../products.php';</script>";
+  }
+  else {
+    echo "<script>location.href='./pos.php';</script>";
+  }
 }

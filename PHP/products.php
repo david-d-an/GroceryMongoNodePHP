@@ -36,8 +36,27 @@ if ($err) {
   echo "cURL Error #:" . $err;
 }
 else {
-  $yummy = json_decode($response);
+  $result = json_decode($response);
 }
+
+$targetpage = "products.php";
+
+if (!isset($_REQUEST["pagenumber"]) || empty($_REQUEST["pagenumber"])){
+	$pagenumber = 1;
+}
+else{
+  $pagenumber = $_REQUEST["pagenumber"];
+}
+
+if (!isset($_REQUEST["pagesize"]) || empty($_REQUEST["pagesize"])){
+  $pagesize = 10;
+}
+else{
+	$pagesize = $_REQUEST["pagesize"];
+}
+
+$pagecount = ceil(count($result) / $pagesize);
+
 ?>
 
 <div class="container">
@@ -64,21 +83,28 @@ else {
 
     <tbody>
 <?php
-for($i=0; $i<count($yummy); $i++)
+// for($i=0; $i<count($result); $i++)
+
+$itemcount = count($result);
+$pagestart = ($pagenumber-1)*$pagesize;
+$pageend = min($pagenumber*$pagesize, $itemcount);
+$pagedisplaycount = $pageend - $pagestart;
+
+for($i=$pagestart; $i < $pageend; $i++)
 {  ?>
       <tr>
-        <td><?php echo $yummy[$i]->_id; ?></th>
-        <td><?php echo $yummy[$i]->ProductName; ?></td>
-        <td><?php echo $yummy[$i]->SupplierID; ?></td>
-        <td><?php echo $yummy[$i]->CategoryID; ?></td>
-        <td><?php echo $yummy[$i]->QuantityPerUnit; ?></td>
-        <td><?php echo $yummy[$i]->UnitPrice; ?></td>
-        <td><?php echo $yummy[$i]->UnitsInStock; ?></td>
+        <td><?php echo $result[$i]->_id; ?></th>
+        <td><?php echo $result[$i]->ProductName; ?></td>
+        <td><?php echo $result[$i]->SupplierID; ?></td>
+        <td><?php echo $result[$i]->CategoryID; ?></td>
+        <td><?php echo $result[$i]->QuantityPerUnit; ?></td>
+        <td><?php echo $result[$i]->UnitPrice; ?></td>
+        <td><?php echo $result[$i]->UnitsInStock; ?></td>
         <td>
-          <a href="delete.php?_id=<?php echo $yummy[$i]->_id; ?>">
+          <a href="delete.php?_id=<?php echo $result[$i]->_id; ?>">
             <button type="button" class="btn btn-danger">Delete</button>
           </a>
-          <!-- <a href="edit.php?_id=<?php echo $yummy[$i]->_id; ?>">
+          <!-- <a href="edit.php?_id=<?php echo $result[$i]->_id; ?>">
             <button type="button" class="btn btn-warning">Edit</button>
           </a> -->
           <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
@@ -89,6 +115,7 @@ for($i=0; $i<count($yummy); $i++)
 <?php } ?>
     </tbody>
   </table>
+  <?php include './class_paging.php'; ?>
 </div>
 
 
