@@ -17,7 +17,6 @@ mongoose
 /***********/
 
 exports.getall = (req,res) => {
-  console.log("Getting it all");
   Product.find()
     .then(p => res.send(p))
     .catch(err => {
@@ -26,7 +25,6 @@ exports.getall = (req,res) => {
 };
 
 exports.get = (req,res) => {
-  console.log("Getting only one");
   Product.findById(req.params._id)
     .then(p => res.send(p))
     .catch(err => {
@@ -35,7 +33,6 @@ exports.get = (req,res) => {
 };
 
 exports.post = (req,res) => {
-  console.log("Posting it");
   if (!req.body.ProductID)
     res.status(400).send({message: "ProductID is missing."});
     
@@ -61,8 +58,6 @@ exports.post = (req,res) => {
 };
 
 exports.put = (req,res) => {
-  console.log("putting it");
-
   if (!req.body.ProductID)
     return res.send({message: "Product ID is missing"});
   else if (!req.body.ProductName)
@@ -95,7 +90,6 @@ exports.put = (req,res) => {
 };
 
 exports.delete = (req,res) => {
-  console.log("Deleting");
   Product.findByIdAndRemove(req.params._id)
     .then(p => {
       if (!p){
