@@ -3,12 +3,11 @@
 $userid = $_REQUEST['username'];
 $password = $_REQUEST['password'];
 
-
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
   CURLOPT_PORT => "3000",
-  CURLOPT_URL => "http://localhost:3000/customer/".$userid."/".$password,
+  CURLOPT_URL => "http://localhost:3000/authentication/".$userid."/".$password,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -32,14 +31,12 @@ if ($err) {
   echo "cURL Error #:" . $err;
 } else {
   $json = json_decode($response, true);
-  // echo $json[0]['_id'];
-  $usercount = count($json);
-  //echo count($json);
 
-  if ($usercount > 0){
+  if (count($json) == 0){
+    echo "<script>location.href='./login.php';</script>";
+  } elseif (!isset($json['_id'])) {
+    echo "<script>location.href='./login.php';</script>";
+  } else {
     echo "<script>location.href='../products.php';</script>";
-  }
-  else {
-    echo "<script>location.href='./pos.php';</script>";
   }
 }

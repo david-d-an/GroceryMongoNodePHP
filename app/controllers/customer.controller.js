@@ -1,6 +1,7 @@
 const Customer = require('../models/customer.model');
 const dbConfig = require("../../config/database.config.js");
 const mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
 
 /***********/
 var options = {
@@ -25,35 +26,17 @@ exports.getall = (req,res) => {
 };
 
 exports.get = (req,res) => {
-  // Customer.findById(req.params.CustomerID)
-  Customer.find(
-    {
-      CustomerID: req.params.userid,
-      // PostalCode: req.params.password
-      // CustomerID: "BLONP",
-      // PostalCode: "12209"
-      // Country: "Germany"
-    }, 
+  Customer.findById(
+    req.params._id,
     (err, user) => {
-      // if there is an error retrieving, send the error. nothing after res.send(err) will execute
       if (err) {
         console.log(err.message);
         res.status(500).send({ message: err.message });
       }
-
-      console.log(user);
-      res.send(user); 
+          
+      res.send(user);
     }
   );
-  // )
-  //   .then(c => {
-  //     console.log(c);
-  //     res.send(c);
-  //   })
-  //   .catch(err => {
-  //     console.log(err.message);
-  //     res.status(500).send({ message: err.message });
-  //   });
 };
 
 exports.post = (req,res) => {
@@ -83,14 +66,8 @@ exports.post = (req,res) => {
 };
 
 exports.put = (req,res) => {
-  if (!req.body.sku)
-    return res.send({message: "SKU is missing"});
-  else if (!req.body.name)
-    return res.send({message: "Name is missing"});
-  else if (!req.body.description)
-    return res.send({message: "Description is missing"});
-
-    Customer.findByIdAndUpdate(req.params.id,
+  Customer.findByIdAndUpdate(
+    req.params._id,
     {
       CustomerID: req.body.CustomerID,
       CompanyName: req.body.CompanyName,
@@ -118,7 +95,7 @@ exports.put = (req,res) => {
 };
 
 exports.delete = (req,res) => {
-  Customer.findByIdAndRemove(req.params.id)
+  Customer.findByIdAndRemove(req.params._id)
     .then(c => {
       if (!c)
         res.status(400).send({

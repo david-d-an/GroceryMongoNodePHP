@@ -50,15 +50,47 @@ if (!empty($_REQUEST['username']) and !empty($_REQUEST['password'])) {
 <br />
 <br />
 
+<h1 class="text-center">Welcome to My Grocery</h1>
+<br />
+<br />
+
 <p class="text-center">
-  <button class="btn btn-lg btn-success" data-toggle="modal" data-target="#loginModal">
+  <!-- <button class="btn btn-lg btn-success" data-toggle="modal" data-target="#loginModal">
     &nbsp;Login&nbsp;
   </button>
   &nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="https://www.google.com" class="btn btn-lg btn-success">Cancel</a>
+	<a href="https://www.google.com" class="btn btn-lg btn-success">Cancel</a> -->
+
+  <form id="loginForm" method="post" class="form-horizontal">
+    <div class="form-group">
+      <div class="col-lg-3"></div>
+      <label class="col-lg-2 control-label">Username</label>
+      <div class="col-lg-2">
+        <input type="text" class="form-control" name="username"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-3"></div>
+      <label class="col-lg-2 control-label">Password</label>
+      <div class="col-lg-2">
+        <input type="password" class="form-control" name="password" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Login</button>
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
+      </div>
+      <div class="text-center">
+        <a href="#">Forgot password?</a>
+      </div>
+    </div>
+  </form>
 </p>
 
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+<!-- <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -69,7 +101,6 @@ if (!empty($_REQUEST['username']) and !empty($_REQUEST['password'])) {
       </div>
 
       <div class="modal-body">
-        <!-- The form is placed inside the body of modal -->
         <form id="loginForm" method="post" class="form-horizontal">
           <div class="form-group">
             <label class="col-xs-3 control-label">Username</label>
@@ -95,7 +126,7 @@ if (!empty($_REQUEST['username']) and !empty($_REQUEST['password'])) {
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <script>
 $(document).ready(function() {

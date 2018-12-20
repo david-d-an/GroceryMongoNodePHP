@@ -58,10 +58,10 @@ exports.post = (req,res) => {
 };
 
 exports.put = (req,res) => {
-  if (!req.body.ProductID)
-    return res.send({message: "Product ID is missing"});
-  else if (!req.body.ProductName)
-    return res.send({message: "Product Name is missing"});
+  // if (!req.body._id)
+  //   return res.send({message: "Product ID is missing"});
+  // else if (!req.body.ProductName)
+  //   return res.send({message: "Product Name is missing"});
 
   Product.findByIdAndUpdate(req.params._id,
     {

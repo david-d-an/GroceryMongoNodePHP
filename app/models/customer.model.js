@@ -9,10 +9,11 @@ var customerSchema = new mongoose.Schema(
     Address: String,
     City: String,
     Region: String,
-    PostalCode: String,
+    PostalCode: mongoose.Schema.Types.Mixed,
     Country: String,
     Phone: String,
-    Fax: String
+    Fax: String,
+    Password: String
   },
   {
     timestamps: true

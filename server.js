@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
 // Require Notes routes
 require("./app/routes/customer.routes")(app);
 require("./app/routes/product.routes")(app);
+require("./app/routes/authentication.routes")(app);
 
 // listen for requests
 app.listen(3000, () => {
