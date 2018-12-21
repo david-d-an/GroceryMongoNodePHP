@@ -70,7 +70,7 @@ $pagecount = ceil(count($result) / $pagesize);
 
 ?>
 
-<?php include '../master/authenticatedHeader.php';?>
+<?php include '../master/fullHeader.php';?>
 
 <div class="container">
   <h2>Grocery Products</h2>
@@ -83,13 +83,14 @@ $pagecount = ceil(count($result) / $pagesize);
     <thead>
       <tr>
         <th>Product ID</th>
-        <th>ProductName</th>
-        <th>SupplierID</th>
-        <th>CategoryID</th>
-        <th>QuantityPerUnit</th>
-        <th>UnitPrice</th>
-        <th>UnitsInStock</th>
-        <th style="width:50px;"></th>
+        <th>Product Name</th>
+        <th>Supplier</th>
+        <th>Category</th>
+        <th>Quantity/Unit</th>
+        <th>Unit Price</th>
+        <th>In Stock</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
 
@@ -117,6 +118,8 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
               <span class="glyphicon glyphicon-pencil"></span>
             </button>
           </p>
+        </td>
+        <td>
           <p data-placement="top" data-toggle="tooltip" title="Delete">
             <a href="./delete.php?_id=<?php echo $result[$i]->_id; ?>">
               <button type="button" class="btn btn-danger">
@@ -138,7 +141,7 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
 <div class="modal fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="addEditModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <form id="addeditform" action="./edit.php" method="get">
+      <form id="addeditform" action="./edit.php" method="get" class="form-horizontal">
         <div class="modal-header">
           <label id="addEditModalLabel">Add/Edit Product</label>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -147,7 +150,7 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
         </div>
         <div class="modal-body">
           <div class="row">
-              <div class="form-group spacer-lg _id">
+              <div class="form-group _id">
                 <div class="col-lg-3 col-lg-offset-1">
                   <label for="productid">Product ID</label>
                 </div>
@@ -156,15 +159,15 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
                   <small id="productidHelp" class="form-text text-muted">Product ID is very important.</small>
                 </div>
               </div>
-              <div class="form-group spacer-md productname">
+              <div class="form-group productname">
                 <div class="col-lg-3 col-lg-offset-1">
                   <label for="productname">Product Name</label>
                 </div>
                 <div class="col-lg-7">
-                  <input type="text" class="form-control" id="productname" name="productname" placeholder="Product Name">
+                  <input type="text" class="form-control" id="productname" name="productname" >
                 </div>
               </div>
-              <div class="form-group spacer-md supplierid">
+              <div class="form-group supplierid">
                 <div class="col-lg-3 col-lg-offset-1">
                   <label for="supplierid">Supplier ID</label>
                 </div>
@@ -172,7 +175,7 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
                   <input type="text" class="form-control" id="supplierid" name="supplierid" placeholder="Supplier ID">
                 </div>
               </div>
-              <div class="form-group spacer-md categoryid">
+              <div class="form-group categoryid">
                 <div class="col-lg-3 col-lg-offset-1">
                   <label for="categoryid">Category ID</label>
                 </div>
@@ -180,7 +183,7 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
                   <input type="text" class="form-control" id="categoryid" name="categoryid" placeholder="Category ID">
                 </div>
               </div>
-              <div class="form-group spacer-md quantityperunit">
+              <div class="form-group quantityperunit">
                 <div class="col-lg-3 col-lg-offset-1">
                   <label for="quantityperunit">Quantity per Unit</label>
                 </div>
@@ -188,7 +191,7 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
                   <input type="text" class="form-control" id="quantityperunit" name="quantityperunit" placeholder="Quantity per Unit">
                 </div>
               </div>
-              <div class="form-group spacer-md unitprice">
+              <div class="form-group unitprice">
                 <div class="col-lg-3 col-lg-offset-1">
                   <label for="unitprice">Unit Price</label>
                 </div>
@@ -196,7 +199,7 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
                   <input type="text" class="form-control" id="unitprice" name="unitprice" placeholder="Unit Price">
                 </div>
               </div>
-              <div class="form-group spacer-md unitsinstock">
+              <div class="form-group unitsinstock">
                 <div class="col-lg-3 col-lg-offset-1">
                   <label for="unitsinstock">Units in Stock</label>
                 </div>
@@ -204,7 +207,7 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
                   <input type="text" class="form-control" id="unitsinstock" name="unitsinstock" placeholder="Units in Stock">
                 </div>
               </div>
-              <div class="form-group spacer-md unitsonorder">
+              <div class="form-group unitsonorder">
                 <div class="col-lg-3 col-lg-offset-1">
                   <label for="unitsonorder">Units on Order</label>
                 </div>
@@ -212,7 +215,7 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
                   <input type="text" class="form-control" id="unitsonorder" name="unitsonorder" placeholder="Units on Order">
                 </div>
               </div>
-              <div class="form-group spacer-md reorderlevel">
+              <div class="form-group reorderlevel">
                 <div class="col-lg-3 col-lg-offset-1">
                   <label for="reorderlevel">Reorder Level</label>
                 </div>
@@ -220,7 +223,7 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
                   <input type="text" class="form-control" id="reorderlevel" name="reorderlevel" placeholder="Reorder Level">
                 </div>
               </div>
-              <div class="form-group spacer-md discontinued">
+              <div class="form-group discontinued">
                 <div class="col-lg-3 col-lg-offset-1">
                   <label for="discontinued">Discontinued</label>
                 </div>
@@ -262,6 +265,8 @@ $('.btn-add').on('click', function(e) {
   $('div.unitsonorder').show();
   $('div.reorderlevel').show();
   $('div.discontinued').show();
+
+  $('#_id').addClass("no-validation");
 });
 
 $('.btn-edit').on('click', function(e) {
@@ -279,6 +284,10 @@ $('.btn-edit').on('click', function(e) {
   $('div.unitsonorder').hide();
   $('div.reorderlevel').hide();
   $('div.discontinued').hide();
+
+  $('#unitsonorder').addClass("no-validation");
+  $('#reorderlevel').addClass("no-validation");
+  $('#discontinued').addClass("no-validation");
 
   var _id = GetColumnValue($(this), '_id');
   var productName = GetColumnValue($(this), 'productname');
@@ -308,6 +317,16 @@ $('#addEditModal').on('hidden.bs.modal', function () {
   $('#unitsonorder').val("");
   $('#reorderlevel').val("");
   $('#discontinued').val("");
+
+  $('#productname').removeClass("no-validation");
+  $('#supplierid').removeClass("no-validation");
+  $('#categoryid').removeClass("no-validation");
+  $('#quantityperunit').removeClass("no-validation");
+  $('#unitprice').removeClass("no-validation");
+  $('#unitsinstock').removeClass("no-validation");
+  $('#unitsonorder').removeClass("no-validation");
+  $('#reorderlevel').removeClass("no-validation");
+  $('#discontinued').removeClass("no-validation");
 })
 
 function GetColumnValue(cell, columnName) {
@@ -324,26 +343,87 @@ function ProcessString(str){
 }
 
 $(function() {
-  $('#loginForm').formValidation({
+  $('#addeditform').formValidation({
     framework: 'bootstrap',
-    excluded: ':disabled',
+    excluded: '.no-validation',
     icon: {
       valid: 'glyphicon glyphicon-ok',
       invalid: 'glyphicon glyphicon-remove',
       validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
-      username: {
+      productname: {
         validators: {
           notEmpty: {
-            message: 'The username is required'
+            message: 'Product Name is required'
           }
         }
       },
-      password: {
+      supplierid: {
         validators: {
           notEmpty: {
-            message: 'The password is required'
+            message: 'Supplier ID is required'
+          }
+        }
+      },
+      categoryid: {
+        validators: {
+          notEmpty: {
+            message: 'Category ID is required'
+          }
+        }
+      },
+      quantityperunit: {
+        validators: {
+          notEmpty: {
+            message: 'Quantity per Unit is required'
+          }
+        }
+      },
+      unitprice: {
+        validators: {
+          notEmpty: {
+            message: 'Unit Price is required'
+          },
+          regexp: {
+            regexp: /^\d+(?:\.\d{0,2})?$/,
+            message: 'Unit Price must be a dollar value'
+          }
+        }
+      },
+      unitsinstock: {
+        validators: {
+          notEmpty: {
+            message: 'Units in Stock is required'
+          },
+          integer: {
+            message: 'Units in Stock must be a number'
+          }
+        }
+      },
+      unitsonorder: {
+        validators: {
+          notEmpty: {
+            message: 'Units on Order is required'
+          },
+          integer: {
+            message: 'Units on Order must be a number'
+          }
+        }
+      },
+      reorderlevel : {
+        validators: {
+          notEmpty: {
+            message: 'Reorder Level is required'
+          },
+          integer: {
+            message: 'Reorder Level must be a number'
+          }
+        }
+      },     discontinued: {
+        validators: {
+          notEmpty: {
+            message: 'Discontinued is required'
           }
         }
       }
