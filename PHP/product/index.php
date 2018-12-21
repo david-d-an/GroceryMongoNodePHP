@@ -70,6 +70,8 @@ $pagecount = ceil(count($result) / $pagesize);
 
 ?>
 
+<?php include '../master/authenticatedHeader.php';?>
+
 <div class="container">
   <h2>Grocery Products</h2>
 
@@ -87,7 +89,7 @@ $pagecount = ceil(count($result) / $pagesize);
         <th>QuantityPerUnit</th>
         <th>UnitPrice</th>
         <th>UnitsInStock</th>
-        <th style="width: 150px;"></th>
+        <th style="width:50px;"></th>
       </tr>
     </thead>
 
@@ -110,12 +112,18 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
         <td class="unitprice"><?php echo $result[$i]->UnitPrice; ?></td>
         <td class="unitsinstock"><?php echo $result[$i]->UnitsInStock; ?></td>
         <td>
-          <a href="./delete.php?_id=<?php echo $result[$i]->_id; ?>">
-            <button type="button" class="btn btn-danger">Delete</button>
-          </a>
-          <button type="button" class="btn btn-warning btn-edit" data-toggle="modal" data-target="#addEditModal">
-            Edit
-          </button>
+          <p data-placement="bottom" data-toggle="tooltip" title="Edit">
+            <button type="button" class="btn btn-warning btn-edit" data-toggle="modal" data-target="#addEditModal">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+          </p>
+          <p data-placement="top" data-toggle="tooltip" title="Delete">
+            <a href="./delete.php?_id=<?php echo $result[$i]->_id; ?>">
+              <button type="button" class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+            </a>
+          </p>
         </td>
       </tr>
 <?php }?>
@@ -303,7 +311,7 @@ $('#addEditModal').on('hidden.bs.modal', function () {
 })
 
 function GetColumnValue(cell, columnName) {
-  var row = $(cell.parent().parent()[0]);
+  var row = $(cell.parent().parent().parent()[0]);
   var val = ProcessString(row.children('.'+columnName)[0].innerHTML.trim());
   return val;
 }

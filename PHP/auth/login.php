@@ -4,13 +4,14 @@
   <title>Login to POS</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   
-  <link rel="stylesheet" href="../packages/dist/css/formValidation.css"/>
-  <script type="text/javascript" src="../packages/dist/js/formValidation.js"></script>
-  <script type="text/javascript" src="../packages/dist/js/framework/bootstrap.js"></script>
+  <link rel="stylesheet" href="../packages/FormValidation/css/formValidation.css"/>
+  <script type="text/javascript" src="../packages/FormValidation/js/formValidation.js"></script>
+  <script type="text/javascript" src="../packages/FormValidation/js/framework/bootstrap.js"></script>
 </head>
 
 <style>
@@ -44,15 +45,7 @@ if (!empty($_REQUEST['username']) and !empty($_REQUEST['password'])) {
 }
 ?>
 
-<br />
-<br />
-<br />
-<br />
-<br />
-
-<h1 class="text-center">Welcome to My Grocery</h1>
-<br />
-<br />
+<?php include '../master/preloginHeader.php';?>
 
 <p class="text-center">
   <!-- <button class="btn btn-lg btn-success" data-toggle="modal" data-target="#loginModal">

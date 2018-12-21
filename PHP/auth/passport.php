@@ -37,6 +37,13 @@ if ($err) {
   } elseif (!isset($json['_id'])) {
     echo "<script>location.href='./login.php';</script>";
   } else {
-    echo "<script>location.href='../products.php';</script>";
+    session_start();
+    $_SESSION['_id'] = $json['_id'];
+    $_SESSION['userid'] = $json['CustomerID'];
+
+    // echo $_SESSION['_id'];
+    // echo $_SESSION['userid'];
+
+    echo "<script>location.href='../product/index.php';</script>";
   }
 }
