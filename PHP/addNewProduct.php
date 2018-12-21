@@ -12,7 +12,7 @@ curl_setopt_array($curl, array(
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "{\n    \"ProductID\": \"2222\",\n    \"ProductName\": \"Chang22\",\n    \"SupplierID\": \"122\",\n    \"CategoryID\": \"122\",\n    \"QuantityPerUnit\": \"222 - 1222 oz bottles\",\n    \"UnitPrice\": 1922,\n    \"UnitsInStock\": 1722,\n    \"UnitsOnOrder\": 420,\n    \"ReorderLevel\": 2522,\n    \"Discontinued\": 0\n}",
+  CURLOPT_POSTFIELDS => '{"ProductID":"27894","ProductName":"Chang22","SupplierID":"122","CategoryID":"122","QuantityPerUnit":"222 - 1222 oz bottles","UnitPrice":"1922","UnitsInStock":"1722","UnitsOnOrder":"420","ReorderLevel":"2522","Discontinued":"0"}',
   CURLOPT_HTTPHEADER => array(
     "Content-Type: application/json",
     "Postman-Token: a4c98706-dda9-447f-b9a4-02c810e26d92",

@@ -65,16 +65,16 @@ exports.put = (req,res) => {
 
   Product.findByIdAndUpdate(req.params._id,
     {
-      ProductID: req.body.ProductID,
+      // ProductID: req.body.ProductID,
       ProductName: req.body.ProductName,
       SupplierID: req.body.SupplierID,
       CategoryID: req.body.CategoryID,
       QuantityPerUnit: req.body.QuantityPerUnit,
       UnitPrice: req.body.UnitPrice,
       UnitsInStock: req.body.UnitsInStock,
-      UnitsOnOrder: req.body.UnitsOnOrder,
-      ReorderLevel: req.body.ReorderLevel,
-      Discontinued: req.body.Discontinued
+      // UnitsOnOrder: req.body.UnitsOnOrder,
+      // ReorderLevel: req.body.ReorderLevel,
+      // Discontinued: req.body.Discontinued
     },
     { new: true }
   )

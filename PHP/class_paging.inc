@@ -19,7 +19,7 @@ $next = $pagenumber + 1;
 $lastpage = $pagecount;
 $LastPagem1 = $lastpage - 1;
 
-echo "Displaying records ".$pagedisplaycount." of ".$itemcount.".";
+echo "Displaying records ".$pagedisplaycount." of ".$itemcount;
 
 $paginate = '';
 if($lastpage >= 1)
