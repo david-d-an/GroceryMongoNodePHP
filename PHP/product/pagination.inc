@@ -1,6 +1,6 @@
 
 <head>
-	<link href="css/style_php_pagination.css" rel="stylesheet" type="text/css" />
+	<link href="../css/pagination.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
