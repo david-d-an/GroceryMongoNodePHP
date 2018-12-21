@@ -32,4 +32,4 @@ if ($err) {
 }
 ?>
 
-<meta http-equiv="refresh" content="0;url=products.php">
+<meta http-equiv="refresh" content="0;url=./index.php">

@@ -13,9 +13,9 @@ session_start();
 // echo $_SESSION['_id'];
 // echo $_SESSION['userid'];
 
-// if (!isset($_SESSION['_id'])) {
-//   echo "<script>location.href='./auth/login.php';</script>";
-// }
+if (!isset($_SESSION['_id'])) {
+  echo "<script>location.href='../auth/login.php';</script>";
+}
 
 $curl = curl_init();
 
@@ -46,7 +46,7 @@ if ($err) {
     $result = json_decode($response);
 }
 
-$targetpage = "products.php";
+$targetpage = "index.php";
 
 if (!isset($_REQUEST["pagenumber"]) || empty($_REQUEST["pagenumber"])) {
     $pagenumber = 1;
@@ -67,11 +67,9 @@ $pagecount = ceil(count($result) / $pagesize);
 <div class="container">
   <h2>Grocery Products</h2>
 
-  <button type="button" class="btn btn-primary btn-add" data-toggle="modal" data-target="#addEditModal">
+  <button type="button" class="btn btn-primary btn-add pull-right" data-toggle="modal" data-target="#addEditModal">
     Add New Product
   </button>
-  <!-- <a href="addNewProduct.php">
-  </a> -->
 
   <table class="table table-striped">
     <thead>
@@ -83,7 +81,7 @@ $pagecount = ceil(count($result) / $pagesize);
         <th>QuantityPerUnit</th>
         <th>UnitPrice</th>
         <th>UnitsInStock</th>
-        <th style="width: 150px;">Options</th>
+        <th style="width: 150px;"></th>
       </tr>
     </thead>
 
@@ -106,7 +104,7 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
         <td class="unitprice"><?php echo $result[$i]->UnitPrice; ?></td>
         <td class="unitsinstock"><?php echo $result[$i]->UnitsInStock; ?></td>
         <td>
-          <a href="delete.php?_id=<?php echo $result[$i]->_id; ?>">
+          <a href="./delete.php?_id=<?php echo $result[$i]->_id; ?>">
             <button type="button" class="btn btn-danger">Delete</button>
           </a>
           <button type="button" class="btn btn-warning btn-edit" data-toggle="modal" data-target="#addEditModal">
@@ -117,7 +115,7 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
 <?php }?>
     </tbody>
   </table>
-  <?php include './class_paging.inc';?>
+  <?php include './pagination.inc';?>
 </div>
 
 
@@ -126,7 +124,7 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
 <div class="modal fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="addEditModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <form id="addeditform" action="editProduct.php" method="get">
+      <form id="addeditform" action="./edit.php" method="get">
         <div class="modal-header">
           <label id="addEditModalLabel">Add/Edit Product</label>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -236,7 +234,7 @@ for ($i = $pagestart; $i < $pageend; $i++) {?>
 <script typ='text/javascript'>
 
 $('.btn-add').on('click', function(e) {
-  $('#addeditform').attr('action', 'addNewProduct.php');
+  $('#addeditform').attr('action', './create.php');
   $('.btn-modal-save').attr('value','Add Product');
   $('#addEditModalLabel').text('Add New Product');
 
@@ -253,7 +251,7 @@ $('.btn-add').on('click', function(e) {
 });
 
 $('.btn-edit').on('click', function(e) {
-  $('#addeditform').attr('action', 'editProduct.php');
+  $('#addeditform').attr('action', './edit.php');
   $('.btn-modal-save').attr('value', 'Update Product');
   $('#addEditModalLabel').text('Update Product');
 
@@ -310,4 +308,32 @@ function ProcessString(str){
   else
     return ""; 
 }
+
+$(function() {
+  $('#loginForm').formValidation({
+    framework: 'bootstrap',
+    excluded: ':disabled',
+    icon: {
+      valid: 'glyphicon glyphicon-ok',
+      invalid: 'glyphicon glyphicon-remove',
+      validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+      username: {
+        validators: {
+          notEmpty: {
+            message: 'The username is required'
+          }
+        }
+      },
+      password: {
+        validators: {
+          notEmpty: {
+            message: 'The password is required'
+          }
+        }
+      }
+    }
+  });
+});
 </script>
